@@ -1,0 +1,11 @@
+---
+- name: KD task 03
+  hosts: stapp03
+  tasks:
+
+  - name: Create a user named siva with a non-interactive shell on the App Server 3.
+    ansible.builtin.user:
+      name: siva
+      state: present
+      shell: /usr/sbin/nologin
+  
