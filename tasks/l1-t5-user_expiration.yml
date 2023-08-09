@@ -1,0 +1,15 @@
+---
+- name: KD task 5
+  hosts: stapp02
+  become: true
+  
+  vars:
+    user: "mariyam"
+
+  tasks:
+  - name: Create a user named mariyam on the App Server 2 in Stratos Datacenter. Set expiry date to 2021-12-07
+    ansible.builtin.user:
+      name: {{user}}
+      state: present
+      expires: 1638817200
+  
