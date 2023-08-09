@@ -1,8 +1,10 @@
 ---
 - name: KD task 02
   hosts: apps
-  tasks:
 
+  vars:
+    user: "rajesh"
+  tasks:
   - name: Create a group named nautilus_noc in all App servers in Stratos Datacenter.
     ansible.builtin.group:
       name: nautilus_noc
@@ -10,7 +12,7 @@
 
   - name: Add the user rajesh to nautilus_noc group in all App servers. (create the user if doesn't exist).
     ansible.builtin.user:
-      name: rajesh
+      name: "{{user}}"
       group: nautilus_noc
       state: present
   

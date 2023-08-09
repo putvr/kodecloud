@@ -1,12 +1,14 @@
 ---
-- name: KD task 3
+- name: KD task 4
   hosts: stapp03
+
+  vars:
+    user: "mariyam"
+
   tasks:
-
   - name: Create a user named kareem in App Server 3 without a home directory.
-
     ansible.builtin.user:
-      name: kareem
+      name: "{{user}}"
       state: present
       create_home: false
   

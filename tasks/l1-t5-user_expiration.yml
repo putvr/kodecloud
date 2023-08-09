@@ -9,7 +9,7 @@
   tasks:
   - name: Create a user named mariyam on the App Server 2 in Stratos Datacenter. Set expiry date to 2021-12-07
     ansible.builtin.user:
-      name: {{user}}
+      name: "{{user}}"
       state: present
-      expires: 1638817200
+      expires: 1638835200
   
