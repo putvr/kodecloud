@@ -1,0 +1,12 @@
+---
+- name: KD task 6
+  hosts: stapp01
+  become: true
+  
+  vars:
+    user: mark
+    path: /home/usersdata
+    dest: /media
+
+  tasks:
+    - shell: cd {{ path }} && find -type f -user {{ user }} -exec cp {} -v --parents {{ dest }} \;
