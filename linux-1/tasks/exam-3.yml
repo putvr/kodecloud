@@ -1,0 +1,46 @@
+---
+- name: exam task 3
+  hosts: stapp03  
+  tasks:
+    - name: create f
+      copy:
+        dest: /opt/finance-t2q5
+        src: /usr/src/finance-t2q5/story-t2q5.txt
+        remote_src: true
+
+- name: exam task 5
+  hosts: all  
+  become: true
+  tasks:
+    - name: create file with content
+      copy:
+        dest: /opt/file-t4q6.txt
+        content: "This file is created by Ansible!"
+        remote_src: true
+
+- name: exam task 6
+  hosts: all  
+  become: true
+  tasks:
+    - name: create file with content
+      copy:
+        dest: /usr/src/webapp-t4q1.txt
+        content: ""
+        remote_src: true
+
+- name: exam task 9
+  hosts: 127.0.0.1  
+  connection: local
+  tasks:
+    - name: echo
+      shell: echo "Welcome!"
+       
+
+- name: exam task 10
+  hosts: stapp03  
+  become: true
+  tasks:
+    - name: install zlib
+      ansible.builtin.package:
+        name: zlib
+        state: present   
