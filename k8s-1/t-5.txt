@@ -1,0 +1,5 @@
+kubectl get deployment nginx-deployment -o yaml > nginx-deployment.yaml
+sed -i 's/nginx\:1\.16/nginx\:1\.18/g' nginx-deployment.yaml
+
+kubectl apply -f nginx-deployment.yaml
+

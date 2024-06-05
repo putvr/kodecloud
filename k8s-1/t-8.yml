@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: xfusion
+spec:
+  schedule: "*/12 * * * *" # This will execute every 12 hours
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: cron-xfusion
+            image: nginx:latest
+            command: ["echo", "Welcome to xfusioncorp"]
+          restartPolicy: OnFailure

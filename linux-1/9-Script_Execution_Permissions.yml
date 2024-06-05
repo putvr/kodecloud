@@ -1,0 +1,19 @@
+---
+- name: Script Execution Permissions
+  hosts: stapp03
+  become: true
+  
+  vars:
+    path: /tmp/xfusioncorp.sh
+
+  tasks:
+    - name: Ensure the script exists
+      stat:
+        path: "{{ path }}"
+      register: script_stat
+
+    - name: Make the script executable
+      file:
+        path: "{{ path }}"
+        mode: '0755'
+      when: script_stat.stat.exists
