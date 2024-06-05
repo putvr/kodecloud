@@ -1,0 +1,34 @@
+---
+- name: File Permission Correction
+  hosts: stapp03
+  become: true
+  
+  vars:
+    path: /etc/hostname
+
+  tasks:
+    - name: Set ownership of {{ path }} to root:root
+      ansible.builtin.file:
+        path: "{{ path }}"
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Set permissions for other
+      ansible.posix.acl:
+        path: "{{ path }}"
+        etype: other
+        permissions: "r"
+        state: present
+        
+    - name: Set permissions for users
+      ansible.posix.acl:
+        path:  "{{ path }}"
+        entity: "{{ item.user }}"
+        etype: user
+        permissions: "{{ item.acl }}"
+        state: present
+      loop:
+        - { user: "kareem", acl: "-" }
+        - { user: "eric", acl: "r" }
+            
