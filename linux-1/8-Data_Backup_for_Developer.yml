@@ -1,0 +1,12 @@
+---
+- name: Data Backup for Developer
+  hosts: ststor01
+  become: true
+  
+  vars:
+    archive: javed.tar.gz
+    path: /data/javed
+    dest: /home
+
+  tasks:
+    - shell: tar czvf {{ archive }} {{ path }} && mv -v {{ archive }} {{ dest }};
