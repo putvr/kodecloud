@@ -1,0 +1,39 @@
+---
+- name: Custom Apache User Setup
+  hosts: apps
+  tasks:
+  - name: create file stapp01
+    hosts: stapp01
+    tasks:
+      - name: 
+        ansible.builtin.file:
+          path: /tmp/nfsdata.txt
+          mode: 0644
+          state: touch
+          owner: tony
+          group: tony
+
+  - name: create file stapp02
+    hosts: stapp02
+    tasks:
+      - name: 
+        ansible.builtin.file:
+          path: /tmp/nfsdata.txt
+          mode: 0644
+          state: touch
+          owner: steve 
+          group: steve 
+
+  - name: create file stapp03
+    hosts: stapp03
+    tasks:
+      - name: 
+        ansible.builtin.file:
+          path: /tmp/nfsdata.txt
+          mode: 0644
+          state: touch
+          owner: banner  
+          group: banner  
+
+    
+    

@@ -1,5 +1,5 @@
 ---
-- name: KD task 7
+- name: Secure Root SSH Access
   hosts: apps
   become: yes
   
@@ -10,8 +10,8 @@
         regexp: '^PermitRootLogin'
         line: "PermitRootLogin no"
         state: present
-     notify:
-       - restart ssh
+      notify:
+        - restart ssh
 
   handlers:
     - name: restart ssh

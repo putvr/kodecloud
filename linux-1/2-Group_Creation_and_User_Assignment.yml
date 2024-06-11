@@ -1,5 +1,5 @@
 ---
-- name: KD task 02
+- name: Group Creation and User Assignment
   hosts: apps
 
   vars:

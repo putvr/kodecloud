@@ -1,5 +1,5 @@
 ---
-- name: KD task 03
+- name: Linux User Setup with Non-Interactive Shell
   hosts: stapp03
 
   vars:

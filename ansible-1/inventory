@@ -1,7 +1,0 @@
-stapp03
-
-[targets]
-stapp03 ansible_connection=ssh ansible_user=banner ansible_password=BigGr33n ansible_become_password=BigGr33n
-
-
-stapp02 ansible_connection=ssh ansible_user=steve ansible_password=Am3ric@ ansible_become_password=Am3ric@

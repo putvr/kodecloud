@@ -1,9 +1,0 @@
----
-- name: Install packages
-  hosts: wsl
-  tasks:
-  - name: Install ansible
-    apt:
-      name: ansible 
-      state: present
-    
