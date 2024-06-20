@@ -1,0 +1,22 @@
+---
+- name: Task "Ansible Unarchive Module"
+  hosts: all
+  become: yes
+
+  vars:
+    src: /usr/src/data/xfusion.zip
+    dest: /opt/data/    
+    owners:
+      stapp01: "tony"
+      stapp02: "steve"
+      stapp03: "banner"
+
+  tasks:
+  - name: unarchive src to dest
+    ansible.builtin.unarchive:
+      src: "{{ src }}"
+      dest: "{{ dest }}"
+      mode: "0777"
+      owner: "{{ owners[inventory_hostname] }}"
+      group: "{{ owners[inventory_hostname] }}"
+      

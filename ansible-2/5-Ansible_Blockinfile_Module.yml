@@ -1,0 +1,36 @@
+---
+- name: Task "Ansible Blockinfile Module"
+  hosts: all
+  become: true
+
+  vars:
+    - index: /var/www/html/index.html
+
+  tasks:
+  - name: Install httpd package on all app servers 
+    yum:
+      name: httpd
+      state: present
+  
+  - name: Start service httpd
+    service: 
+      name: httpd
+      state: started
+
+  - name: Full the content of file
+    ansible.builtin.blockinfile:
+      path: "{{ index }}"
+      create: yes
+      block: |        
+        Welcome to XfusionCorp!
+        This is  Nautilus sample file, created using Ansible!
+        Please do not modify this file manually!
+ 
+  - name: Check permission
+    ansible.builtin.file:
+      path: "{{ index }}"
+      owner: apache
+      group: apache
+      mode: '0755'    
+      
+ 

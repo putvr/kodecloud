@@ -1,0 +1,31 @@
+---
+- name: Task "Ansible Archive Module"
+  hosts: all
+  become: yes
+
+  vars:
+    dst: /usr/src/itadmin/
+    src: /opt/itadmin/
+    archive: beta.tar.gz
+    owners:
+      stapp01: "tony"
+      stapp02: "steve"
+      stapp03: "banner"
+
+  tasks:
+  - name: Archive
+    community.general.archive:
+      path: "{{ dst }}"
+      dest: "/tmp/{{ archive }}" 
+      format: gz
+      force_archive: true
+
+  - name: move to dest
+    ansible.builtin.copy:
+      remote_src: true
+      src: "/tmp/{{ archive }}"
+      dest: "{{ src }}"
+      mode: "0644"
+      owner: "{{ owners[inventory_hostname] }}"
+      group: "{{ owners[inventory_hostname] }}"
+      

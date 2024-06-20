@@ -1,0 +1,6 @@
+---
+- name: Ansible Ping Module Usage
+  hosts: stapp01
+  tasks:
+  - name: ping   
+    ansible.builtin.ping:
