@@ -1,0 +1,16 @@
+---
+- name: Task 16 "NTP Configuration"
+  hosts: stapp02
+  become: true
+  tasks: 
+    - name: Install ntp
+      ansible.builtin.yum:
+        name: ntp
+        state: latest
+
+    - name: Add NTP server 1.my.pool.ntp.org in NTP configuration
+      ansible.builtin.lineinfile:
+        path: /etc/ntp.conf
+        line: server 1.my.pool.ntp.org iburst
+
+        

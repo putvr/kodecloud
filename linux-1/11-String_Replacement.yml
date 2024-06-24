@@ -1,0 +1,10 @@
+---
+- name: Task 10 "String Replacement"
+  hosts: stbkp01
+  become: true
+  tasks:
+    - name: Replace text in file
+      ansible.builtin.replace:
+        path: /root/nautilus.xml
+        regexp: 'Text' 
+        replace: Cloud

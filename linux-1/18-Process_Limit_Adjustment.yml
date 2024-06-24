@@ -1,0 +1,13 @@
+- name: Task 18 "Process Limit Adjustment"
+  become: true
+  hosts: storage
+  tasks:
+  - name: Set soft limit
+    lineinfile:
+      path: /etc/security/limits.conf
+      line: "nfsuser soft nproc 1025"
+
+  - name: Set hard limit
+    lineinfile:
+      path: /etc/security/limits.conf
+      line: "nfsuser hard nproc 2026"

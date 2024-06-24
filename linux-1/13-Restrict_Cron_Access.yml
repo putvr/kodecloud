@@ -1,0 +1,18 @@
+---
+- name: Task 13 "Restrict Cron Access"
+  become: true
+  hosts: stapp01
+  tasks:
+    - name: Allow access
+      ansible.builtin.lineinfile:
+        path: /etc/cron.allow
+        line: mark
+        state: present
+        create: true
+
+    - name: Deny access
+      ansible.builtin.lineinfile:
+        path: /etc/cron.deny
+        line: rod
+        state: present
+        create: true

@@ -1,0 +1,9 @@
+---
+- name: Task 15 "Timezone Alignment"
+  hosts: all 
+  become: true
+  tasks: 
+    - name: Set timesone
+      community.general.timezone:
+        name: Asia/Karachi
+        

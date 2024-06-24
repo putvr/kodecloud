@@ -1,0 +1,9 @@
+---
+- name: Task 12 "Secure Data Transfer"
+  become: true
+  hosts: stapp03
+  tasks:
+    - name: Copy file to server
+      ansible.builtin.copy:
+        src: /tmp/nautilus.txt.gpg
+        dest: /home/opt/nautilus.txt.gpg

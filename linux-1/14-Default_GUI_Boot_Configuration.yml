@@ -1,0 +1,8 @@
+---
+- name: Task 14 "Default GUI Boot Configuration"
+  hosts: all 
+  become: true
+  tasks: 
+    - name: Adjust the default runlevel to enable GUI booting by default.
+      ansible.builtin.command: "systemctl set-default graphical.target"
+        

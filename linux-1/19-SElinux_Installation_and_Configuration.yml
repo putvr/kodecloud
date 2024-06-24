@@ -1,0 +1,21 @@
+---
+- name: Task 19 "SElinux Installation and Configuration"
+  become: true
+  hosts: stapp02
+  tasks:
+    - name: Install SELinux
+      yum:
+        name:           
+          - policycoreutils
+          - selinux-policy-targeted
+        state: present
+
+    - name: Disable SELinux
+      copy:
+        content: | 
+          SELINUX=disabled 
+        dest: /etc/selinux/config
+        owner: root
+        group: root
+        mode: 644
+      
