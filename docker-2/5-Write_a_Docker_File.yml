@@ -1,0 +1,24 @@
+---
+- name: Task "Write a Docker File"
+  become: true
+  hosts: stapp03
+  vars:
+    - port: 3001
+    - image: res:v1
+  tasks: 
+    - name: Create Dockerfile
+      copy:
+        dest: /opt/docker/Dockerfile
+        content: | 
+          FROM ubuntu:latest
+          RUN apt update && apt install apache2 -y
+          RUN sed -i 's/Listen 80/Listen {{ port }}/g' /etc/apache2/ports.conf
+          EXPOSE {{ port }}
+          ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+
+    - name: Build image
+      command: docker build -f /opt/docker/Dockerfile -t {{ image }} .
+
+    - name: Run image
+      command: docker run -d --rm -p {{ port }}:{{ port }} {{ image }}
+        

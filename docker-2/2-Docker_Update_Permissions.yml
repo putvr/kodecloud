@@ -1,0 +1,13 @@
+---
+- name: Task "Docker Update Permissions"
+  hosts: stapp03
+  become: yes
+  vars:
+    - user: james
+
+  tasks:
+  - name: Add  user '{{ user }}' to group docker
+    user:
+      name: '{{ user }}'
+      groups: docker
+      append: yes
