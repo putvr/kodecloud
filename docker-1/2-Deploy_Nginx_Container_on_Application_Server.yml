@@ -1,0 +1,10 @@
+---
+- name: Deploy Nginx Container on Application Server
+  hosts: stapp03
+  become: true
+  
+  tasks:   
+    - name: Create an nginx container
+      ansible.builtin.shell: |
+        docker run -d --name nginx_3 nginx:alpine
+

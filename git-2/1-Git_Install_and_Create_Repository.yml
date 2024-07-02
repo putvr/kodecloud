@@ -1,0 +1,13 @@
+---
+- name: Task 1 "Git Install and Create Repository"
+  become: true
+  hosts: storage
+  tasks:
+    - name: Install git
+      yum:
+        name: git
+        state: present
+
+    - name: Init repo
+      command: git init /opt/apps.git
+      
