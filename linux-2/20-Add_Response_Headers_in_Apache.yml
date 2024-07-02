@@ -1,0 +1,35 @@
+---
+- name: Task 20 "Add Response Headers in Apache"
+  hosts: stapp03
+  become: true
+  tasks: 
+    - name: Install httpd package on the application server
+      yum: 
+        name: httpd
+        state: present
+    - name: Create index file
+      copy:
+        dest: /var/www/html/index.html
+        content: "Welcome to the xFusionCorp Industries!"
+    - name: Configure headers
+      copy:
+        dest: /etc/httpd/conf.d/modules.conf
+        content: |
+          Header set X-XSS-Protection "1; mode=block"
+          Header set X-Frame-Options "SAMEORIGIN"
+          Header set X-Content-Type-Options "nosniff"
+    - name: Configure port
+      copy:
+        dest: /etc/httpd/conf.d/ports.conf
+        content: "Listen 5001"    
+    - name: Enable httpd to start during boot
+      service: 
+        name: httpd
+        state: restarted
+    - name: Check
+      shell: curl -v http://stapp03:5001
+      register: curl_result
+    - name: Debug
+      debug:
+        var: curl_result
+       

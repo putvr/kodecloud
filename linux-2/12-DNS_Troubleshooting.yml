@@ -1,0 +1,10 @@
+---
+- name: Task 12 "DNS Troubleshooting"
+  become: true
+  hosts: stapp01
+  tasks:
+    - name: Fix DNS resolution 
+      ansible.builtin.lineinfile:
+        path: /etc/resolv.conf
+        line: "nameserver 8.8.8.8"
+        state: present

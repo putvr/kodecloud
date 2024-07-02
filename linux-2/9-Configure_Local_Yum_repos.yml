@@ -1,0 +1,15 @@
+---
+- name: Task 9 "Configure Local Yum repos"
+  hosts: backup
+  become: true
+  tasks: 
+    - name: Add repository
+      yum_repository:
+        name: epel_local
+        ui_repoid_vars: epel_local
+        description: EPEL YUM repo
+        baseurl: /packages/downloaded_rpms/
+    - name: Install vim-enhanced
+      yum: 
+        name: vim-enhanced
+        state: present

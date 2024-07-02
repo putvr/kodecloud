@@ -1,0 +1,21 @@
+---
+- name: "Create a Cron Job"
+  become: true
+  hosts: apps
+  tasks:
+    - name: Install cron
+      package:
+        name: cronie
+        state: present
+    
+    - name: Start cron service
+      service:
+        name: crond
+        state: started
+        
+    - name: Create a job 
+      ansible.builtin.cron:
+        name: main
+        user: root
+        minute: "*/5"
+        job: "echo hello > /tmp/cron_text"

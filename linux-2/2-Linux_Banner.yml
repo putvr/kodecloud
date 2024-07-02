@@ -1,0 +1,16 @@
+---
+- name: Task 2 "Linux Banner"
+  hosts: 
+    - apps
+    - db 
+  become: true
+  tasks:
+    - name: Set motd
+      copy: 
+        src: /home/thor/nautilus_banner
+        dest: /etc/motd
+
+    - name: Restart sshd
+      service:
+        name: sshd
+        state: restated

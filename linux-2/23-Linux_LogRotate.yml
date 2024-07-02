@@ -1,0 +1,27 @@
+---
+- name: Task 23 "Linux LogRotate"
+  become: true
+  hosts: apps
+  tasks:
+    - name: Install haproxy
+      yum:
+        name: haproxy
+        state: present
+    - name: Configure logrotate
+      copy:
+        dest: /etc/logrotate.d/haproxy
+        content: |
+          /var/log/haproxy.log {
+              monthly
+              rotate 3
+              missingok
+              notifempty
+              compress
+              sharedscripts
+              postrotate
+                  /bin/kill -HUP `cat /var/run/syslogd.pid 2> /dev/null` 2> /dev/null || true
+                  /bin/kill -HUP `cat /var/run/rsyslogd.pid 2> /dev/null` 2> /dev/null || true
+              endscript
+          }
+
+      

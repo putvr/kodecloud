@@ -1,0 +1,9 @@
+---
+- name: Task 4 "Linux String Substitute (sed)"
+  hosts: stapp03
+  become: true
+  tasks:  
+    - name: Delete all lines containing word following and save results in /home/BSD_DELETE.txt file
+      command: grep -v "following" /home/BSD.txt > /home/BSD_DELETE.txt
+    - name: Replace all occurrence of word from to them and save results in /home/BSD_REPLACE.txt file.
+      command: sed 's/ from / them /g' /home/BSD.txt > /home/BSD_REPLACE.txt

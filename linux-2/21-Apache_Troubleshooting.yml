@@ -1,0 +1,24 @@
+---
+- name: Task 21 "Apache Troubleshooting"
+  hosts: apps
+  become: true
+  tasks: 
+    - name: Configure port
+      lineinfile:
+        dest: /etc/httpd/conf/httpd.conf
+        line: Listen 8085
+        regex: '^Listen.*$'
+    - name: Configure ServerRoot
+      lineinfile:
+        dest: /etc/httpd/conf/httpd.conf
+        line: ServerRoot "/etc/httpd"
+        regex: '^ServerRoot.*$'
+    - name: Configure DocumentRoot
+      lineinfile:
+        dest: /etc/httpd/conf/httpd.conf
+        line: DocumentRoot "/var/www/html"
+        regex: '^DocumentRoot.*$'        
+    - name: Restart httpd 
+      service: 
+        name: httpd
+        state: restarted

@@ -1,0 +1,38 @@
+---
+- name: Task 13 "Linux Firewalld Setup"
+  become: true
+  hosts: apps
+  tasks:    
+    - name: Install firewalld
+      yum:
+        name: firewalld
+        state: present
+    - name: Start and enable firewalld
+      systemd:
+        name: firewalld
+        state: started
+        enabled: yes
+    - name: Allow incoming connections on port 80
+      ansible.posix.firewalld:
+        port: 80/tcp
+        permanent: true
+        zone: public
+        state: enabled   
+    - name: Block incoming connections on port 8080
+      ansible.posix.firewalld:
+        port: 8080/tcp
+        permanent: true
+        zone: public
+        state: disabled    
+    - name: Reload firewalld to apply changes
+      service: 
+        name: firewalld
+        state: restarted
+    - name: Start services
+      service: 
+        name: "{{ item }}"
+        state: started
+        enabled: true
+      loop:
+        - nginx
+        - httpd         

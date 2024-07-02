@@ -1,0 +1,9 @@
+---
+- name: Task 7 "Install a package"
+  hosts: apps
+  become: true
+  tasks: 
+    - name: Install epel-release
+      package: 
+        name: epel-release
+        state: present

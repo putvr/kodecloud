@@ -1,0 +1,16 @@
+---
+- name: Task 3 "Linux Collaborative Directories"
+  hosts: stapp02
+  become: true
+  tasks:  
+    - name: Ensure group "devops" exists
+      ansible.builtin.group:
+        name: devops
+        state: present
+    - name: create dir
+      file:
+        path: /devops/data       
+        state: directory
+        group: devops
+        mode: u+rwx,g+rwx,o-rwx
+   

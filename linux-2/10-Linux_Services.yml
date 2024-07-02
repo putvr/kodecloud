@@ -1,0 +1,9 @@
+---
+- name: Task 10 "Linux Services"
+  hosts: apps
+  become: true
+  tasks: 
+    - name: Install nscd package on all the application servers.
+      yum: name="nscd" state="present"
+    - name: Enable nscd to start during boot
+      service: name="nscd" state="started" enabled=true

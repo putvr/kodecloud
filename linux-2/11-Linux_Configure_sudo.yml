@@ -1,0 +1,10 @@
+---
+- name: Task 11 "Linux Configure sudo"
+  become: true
+  hosts: apps
+  tasks:
+    - name: Provide sudo access to user jim on all app servers.
+      ansible.builtin.lineinfile:
+        path: /etc/sudoers 
+        line: "jim ALL=(ALL) NOPASSWD: ALL"
+        state: present
