@@ -1,0 +1,25 @@
+---
+- name: task 4
+  become: true
+  hosts: all
+  vars:
+    index_file: /var/www/html/index.html
+  tasks:
+    - yum:
+        name: httpd 
+        state: present
+    - service:
+        name: httpd 
+        enabled: true
+        state: started
+    - copy:
+        dest: "{{ index_file }}"
+        content: This is a Nautilus sample file, created using Ansible!
+        owner: apache 
+        group: apache 
+        mode: '0755'
+    - lineinfile:
+        path: "{{ index_file }}"
+        line: Welcome to xFusionCorp Industries!
+        state: present
+        insertafter: BOF

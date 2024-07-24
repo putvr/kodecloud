@@ -1,0 +1,40 @@
+---
+- name: task 1
+  hosts: stapp01
+  become: true
+  tasks:
+  - ansible.builtin.file:
+      path: /opt/sysops/blog.txt
+      state: touch
+  - ansible.posix.acl:
+      path: /opt/sysops/blog.txt
+      entity: tony
+      etype: group
+      permissions: r
+      state: present     
+- name: task 2
+  hosts: stapp02
+  become: true
+  tasks:
+  - ansible.builtin.file:
+      path: /opt/sysops/story.txt
+      state: touch
+  - ansible.posix.acl:
+      path: /opt/sysops/story.txt
+      entity: steve
+      etype: user
+      permissions: rw
+      state: present        
+- name: task 3 
+  hosts: stapp03
+  become: true
+  tasks:
+  - ansible.builtin.file:
+      path: /opt/sysops/media.txt
+      state: touch      
+  - ansible.posix.acl:
+      path: /opt/sysops/media.txt
+      entity: banner
+      etype: group
+      permissions: rw
+      state: present       

@@ -1,0 +1,15 @@
+---
+- name: task 3
+  become: true
+  hosts: all
+  tasks:
+    - yum:
+        name: vsftpd
+        state: present
+    - service:
+        name: vsftpd
+        enabled: true
+        state: started
+
+    
+    

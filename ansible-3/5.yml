@@ -1,0 +1,25 @@
+---
+- name: task 5.1
+  become: true
+  hosts: stapp01
+  tasks:
+    - replace:
+        path: /opt/finance/blog.txt
+        regexp: xFusionCorp 
+        replace: Nautilus 
+- name: task 5.2
+  become: true
+  hosts: stapp02
+  tasks:
+    - replace:
+        path: /opt/finance/story.txt
+        regexp: Nautilus  
+        replace: KodeKloud        
+- name: task 5.3
+  become: true
+  hosts: stapp03
+  tasks:
+    - replace:
+        path: /opt/finance/media.txt
+        regexp: KodeKloud   
+        replace: xFusionCorp Industries       

@@ -1,0 +1,37 @@
+---
+- name: task 1
+  hosts: stapp01
+  become: true
+  tasks:
+  - ansible.builtin.file:
+      path: /opt/sysops/blog.txt
+      owner: tony
+      group: tony
+      state: touch
+- name: task 2
+  hosts: stapp02
+  become: true
+  tasks:
+  - ansible.builtin.file:
+      path: /opt/sysops/story.txt
+      owner: steve
+      group: steve
+      state: touch
+- name: task 3 
+  hosts: stapp03
+  become: true
+  tasks:
+  - ansible.builtin.file:
+      path: /opt/sysops/media.txt
+      owner: banner
+      group: banner
+      state: touch      
+- name:  Create links
+  hosts: all
+  become: true
+  tasks:
+  - ansible.builtin.file:
+      src: /opt/sysops
+      dest: /var/www/html
+      state: link
+  
